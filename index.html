@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hello World</title>
+  <title>Receipt Entry</title>
   <!-- Add some CSS to change client UI -->
   <style>
     form    {display: table;}
@@ -35,54 +35,103 @@
       font-size: 20px;
       border-radius: 6px;
     }
-    .outside {
-      border: 3px solid white;
-      border-radius: 15px;
-      text-align: center;
-      padding: 10px;
+		.outside {
+			border: 3px solid white;
+			border-radius: 15px;
+			text-align: center;
+			padding: 10px;
     }
+	
+		.loginPopup {
+			position: relative;
+			text-align: center;
+			width: 100%;
+		}
+		.formPopup {
+			display: none;
+			position: fixed;
+			left: 45%;
+			top: 5%;
+			transform: translate(-50%, 5%);
+			border: 3px solid #999999;
+			z-index: 9;
+		}
+		.formContainer {
+			display: table;
+			max-width: 500px;
+			padding: 20px;
+			background-color: #fff;
+		}
   </style>
 	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 	<script type="text/javascript" src="./actions.js"></script>
   <script type="text/javascript" src="./functions.js"></script>
 </head>
 <body>
-    <form>
-      <p>
-        <label>Receipt#</label>
-        <input id="receipt_input" type="text" autofocus>
-      </p>
-      <p>
-        <label>Subtotal</label>
-        <input id="subtotal_input" type="text">
-      </p>
-      <p>
-        <label>Description</label>
-        <input id="desc_input" type="text">
-      </p>
-      <p>
-        <label>Not Taxable</label>
-        <input id="taxable_checkbox" type="checkbox">
-      </p>
-      <p>
-        <button type="button" id="enter_btn" class="btn_style" onclick="addEntry()">Enter</button>
-      </p>
-      <br>
-      <p>
-        <button type="button" id="export_btn">Export CSV</button>
-      </p>
-    </form>
-    <br>
-    <form>
-      <table id="rtab" style="width:100%" class="outside">
-        <tr>
-          <th>Receipt#</th>
-          <th>Subtotal</th>
-          <th>Description</th>
-          <th>Taxable</th>
-          <th>Buttons</th>
-        </tr>
-      </table>
-    </form>
+	<div id="loginPopup">
+		<div class="formPopup" id="popupForm">
+			<form class="formContainer">
+				<p>
+					<label>Receipt#</label>
+					<input id="form_receipt_input" type="text" autofocus>
+				</p>
+				<p>
+					<label>Subtotal</label>
+					<input id="form_subtotal_input" type="text">
+				</p>
+				<p>
+					<label>Description</label>
+					<input id="form_desc_input" type="text">
+				</p>
+				<p>
+					<label>Not Taxable</label>
+					<input id="form_taxable_checkbox" type="checkbox">
+				</p>
+				<br>
+				<p>
+					<button type="button" id="formConfirm">Confirm</button>
+					<button type="button" id="formCancel" onclick="closeForm()">Cancel</button>
+				</p>
+			</form>
+		</div>
+	</div>
+	<form>
+		<p>
+			<label>Receipt#</label>
+			<input id="receipt_input" type="text" autofocus>
+		</p>
+		<p>
+			<label>Subtotal</label>
+			<input id="subtotal_input" type="text">
+		</p>
+		<p>
+			<label>Description</label>
+			<input id="desc_input" type="text">
+		</p>
+		<p>
+			<label>Not Taxable</label>
+			<input id="taxable_checkbox" type="checkbox">
+		</p>
+	<br>
+		<p>
+			<button type="button" id="enter_btn" class="btn_style" onclick="addEntry()">Enter</button>
+		</p>
+		<br>
+		<p>
+			<button type="button" id="export_btn">Export CSV</button>
+		</p>
+	</form>
+	<br>
+	<form>
+		<table id="rtab" style="width:100%" class="outside">
+			<tr>
+				<th>Receipt#</th>
+				<th>Subtotal</th>
+				<th>Description</th>
+				<th>Taxable</th>
+				<th>Buttons</th>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>
